@@ -35,5 +35,21 @@
 		function getStatus(){ return $this->status; }
 		function setStatusPengajuan($status_pengajuan){ $this->status_pengajuan = $status_pengajuan; }
 		function getStatusPengajuan(){ return $this->status_pengajuan; }
+
+		// ## Cek judul yang telah di ACC untuk pengecekan pengajuan seminar
+		function cek_judul_acc(){
+			$this->db->select('id, mhsid, judul');
+			$this->db->where('mhsid', $this->getMhsID());
+			$this->db->where('status', 3);
+			$this->db->from('judul');
+
+			$result = $this->db->get();
+			if($result->num_rows() > 0){
+				return $result->result_array();
+			}else{
+				return NULL;
+			}
+		}
+
 	}
 ?>
