@@ -73,12 +73,26 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+$config = 2;
+
+if($config == 1){
+	$hostname = 'localhost';
+	$username = 'id5952083_root';
+	$password = 'kainlap123';
+	$database = 'id5952083_0skr_coffee';
+}else{
+	$hostname = 'localhost';
+	$username = 'root';
+	$password = '';
+	$database = '0skr_tugasakhir';
+}
+
 $db['default'] = array(
 	'dsn'	=> '',
-	'hostname' => 'localhost',
-	'username' => 'root',
-	'password' => '',
-	'database' => '0skr_tugasakhir',
+	'hostname' => $hostname,
+	'username' => $username,
+	'password' => $password,
+	'database' => $database,
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => FALSE,
