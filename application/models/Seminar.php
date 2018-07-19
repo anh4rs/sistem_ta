@@ -19,6 +19,7 @@
 
 		function setID($id){ $this->id = $id; }
 		function getID(){ return $this->id; }
-
+		function setTanggal($tanggal){ $this->tanggal = $tanggal; }
+		function getTanggal(){ return $this->tanggal; }
 	}
 ?>
