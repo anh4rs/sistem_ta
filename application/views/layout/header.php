@@ -61,7 +61,7 @@
                     <div class="col-md-12">
                         <div class="navbar-collapse collapse ">
                             <ul id="menu-top" class="nav navbar-nav navbar-right">
-                                <li><a href="index.html">Dashboard</a></li>
+                                <li><a href="<?=site_url();?>/dashboards">Dashboard</a></li>
                                 <?php
                                 if($jenis_user === "akademik"){
                                 ?>
