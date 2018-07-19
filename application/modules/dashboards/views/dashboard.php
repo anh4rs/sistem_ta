@@ -11,11 +11,13 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="alert alert-success">
-                    <?php
-                    	// echo $id_user;
-                    	print_r($data_user);
-                    ?>
+                    Login Berhasil <br>
+                    <?=print_r($data_user);?>
                 </div>
+
+                <center>
+                    <h2>Selamat Datang pada Sistem Tugas Akhir Fakultas Ilmu Komputer Universitas Ubudiyah Indonesia</h2>
+                </center>
             </div>
         </div>
     </div>

@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pengajuanseminars extends MY_Controller {
+class Pengajuansidangs extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
 		$this->load->model('judul');
-		$this->load->model('seminar');
+		$this->load->model('sidang');
 	}
 
 	function index(){
@@ -15,58 +15,60 @@ class Pengajuanseminars extends MY_Controller {
 		$data['id_user'] = $id_user;
 		$data['jenis_user'] = $jenis_user;
 
-		$this->seminar->setMhsID($id_user);
-		$result = $this->seminar->list_judul_acc_by_mahasiswa();
+		$this->sidang->setMhsID($id_user);
+		$result = $this->sidang->list_judul_acc_by_mahasiswa();
 		$data['result'] = $result;
 
-		$this->seminar->setMhsID($id_user);
-		$cek_judul_acc = $this->seminar->cek_judul_acc();
+		$this->sidang->setMhsID($id_user);
+		$cek_judul_acc = $this->sidang->cek_judul_acc();
+		$cek_hasil_seminar = $this->sidang->cek_hasil_seminar();
 		$data['cek_judul_acc'] = $cek_judul_acc;
+		$data['cek_hasil_seminar'] = $cek_hasil_seminar;
 
-		$detail_seminar = NULL;
+		$detail_sidang = NULL;
 
-		$status_seminar = $this->seminar->cek_status_seminar();
+		$status_sidang = $this->sidang->cek_status_sidang();
 		$status = 0;
-		if(count($status_seminar) > 0){
-			foreach ($status_seminar as $key => $val) {
+		if(count($status_sidang) > 0){
+			foreach ($status_sidang as $key => $val) {
 				$status = $val['status_pengajuan'];
 			}
 
 			if($status == 3){
-				$this->seminar->setMhsID($id_user);
-				$detail_seminar = $this->seminar->get_tanggal_seminar_mhs();
+				$this->sidang->setMhsID($id_user);
+				$detail_sidang = $this->sidang->get_tanggal_sidang_mhs();
 			}
 		}
 
 		$data['status'] = $status;
-		$data['detail_seminar'] = $detail_seminar;
+		$data['detail_sidang'] = $detail_sidang;
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('list', $data);
 		$this->load->view('layout/footer');
 	}
 
-	function pengajuan_seminar(){
+	function pengajuan_sidang(){
 		$id_user = $this->session->userdata('id_user');
 		$id_judul = $this->uri->segment(3);
 
-		$status_seminar = $this->seminar->cek_status_seminar();
-		if(count($status_seminar) > 0){
-			//jika data seminar sudah ada, maka edit status pengajuannya (pengajuan ulang)
+		$status_sidang = $this->sidang->cek_status_sidang();
+		if(count($status_sidang) > 0){
+			//jika data sidang sudah ada, maka edit status pengajuannya (pengajuan ulang)
 
 		}else{
-			$this->seminar->setMhsID($id_user);
-			$this->seminar->setJudulID($id_judul);
-			$add = $this->seminar->add_seminar_mhs();
+			$this->sidang->setMhsID($id_user);
+			$this->sidang->setJudulID($id_judul);
+			$add = $this->sidang->add_sidang_mhs();
 
 			if($add){
-				$this->session->set_flashdata('success', 'Pengajuan seminar berhasil dilakukan');
+				$this->session->set_flashdata('success', 'Pengajuan sidang berhasil dilakukan');
 			}else {
 				$this->session->set_flashdata('warning', 'terjadi kesalahan');
 			}
 		}
 
-		redirect('pengajuanseminars','refresh');
+		redirect('pengajuansidangs','refresh');
 	}
 
 	function tambah_data(){

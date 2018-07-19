@@ -1263,6 +1263,12 @@ class CI_Form_validation {
 		return TRUE;
 	}
 
+	public function valid_date($date)
+	{
+	    $d = DateTime::createFromFormat('Y-m-d', $date);
+	    return $d && $d->format('Y-m-d') === $date;
+	}
+
 	// --------------------------------------------------------------------
 
 	/**

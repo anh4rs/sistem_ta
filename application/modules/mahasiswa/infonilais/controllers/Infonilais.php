@@ -1,12 +1,13 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Pengajuanseminars extends MY_Controller {
+class Infonilais extends MY_Controller {
 
 	function __construct(){
 		parent::__construct();
 		$this->load->model('judul');
 		$this->load->model('seminar');
+		$this->load->model('sidang');
 	}
 
 	function index(){
@@ -20,26 +21,16 @@ class Pengajuanseminars extends MY_Controller {
 		$data['result'] = $result;
 
 		$this->seminar->setMhsID($id_user);
+		$this->sidang->setMhsID($id_user);
+
 		$cek_judul_acc = $this->seminar->cek_judul_acc();
 		$data['cek_judul_acc'] = $cek_judul_acc;
 
-		$detail_seminar = NULL;
+		$nilai_seminar = $this->seminar->nilai_seminar_mhs();
+		$nilai_sidang = $this->sidang->nilai_sidang_mhs();
 
-		$status_seminar = $this->seminar->cek_status_seminar();
-		$status = 0;
-		if(count($status_seminar) > 0){
-			foreach ($status_seminar as $key => $val) {
-				$status = $val['status_pengajuan'];
-			}
-
-			if($status == 3){
-				$this->seminar->setMhsID($id_user);
-				$detail_seminar = $this->seminar->get_tanggal_seminar_mhs();
-			}
-		}
-
-		$data['status'] = $status;
-		$data['detail_seminar'] = $detail_seminar;
+		$data['nilai_seminar'] = $nilai_seminar;
+		$data['nilai_sidang'] = $nilai_sidang;
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('list', $data);

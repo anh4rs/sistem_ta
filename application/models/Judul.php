@@ -273,5 +273,64 @@
 			$this->db->update('judul', $data, array('id'=>$this->getID()));
 			return $this->db->affected_rows();
 		}
+
+		function get_mahasiswa_bimbingan_dosen(){
+			$this->db->select('
+				judul.id,
+				judul.judul,
+				judul.mhsid,
+				judul.status,
+				judul.pembimbing,
+				mahasiswa.nim,
+				mahasiswa.nama_mhs,
+				judul_detail.id as id_detail,
+				judul_detail.ringkas_masalah,
+				judul_detail.metode,
+				judul_detail.deskripsi
+			');
+			$this->db->from('judul');
+			$this->db->join('judul_detail', 'judul_detail.id_judul = judul.id');
+			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
+			$this->db->where('judul.pembimbing', $this->getPembimbing());
+
+			$result = $this->db->get();
+
+			if($result->num_rows() > 0){
+				return $result->result_array();
+			}else{
+				return NULL;
+			}
+		}
+
+		function get_mahasiswa_pengujian_dosen(){
+			$this->db->select('
+				judul.id,
+				judul.judul,
+				judul.mhsid,
+				judul.status,
+				judul.pembimbing,
+				mahasiswa.nim,
+				mahasiswa.nama_mhs,
+				dosen.nama_dosen,
+				judul_detail.id as id_detail,
+				judul_detail.ringkas_masalah,
+				judul_detail.metode,
+				judul_detail.deskripsi
+			');
+			$this->db->from('judul');
+			$this->db->join('judul_detail', 'judul_detail.id_judul = judul.id');
+			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
+			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
+			$this->db->where('judul.penguji1', $this->getPembimbing());
+			$this->db->or_where('judul.penguji2', $this->getPembimbing());
+
+			$result = $this->db->get();
+
+			if($result->num_rows() > 0){
+				return $result->result_array();
+			}else{
+				return NULL;
+			}
+		}
 	}
 ?>
