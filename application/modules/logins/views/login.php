@@ -10,7 +10,7 @@
         <div class="row">
             <div class="col-md-6">
                 <form id="loginform" class="form-vertical" method="post" action="<?=site_url('logins/proses_login')?>">
-                    <label>Enter Email ID : </label>
+                    <label>Enter Username : </label>
                     <input type="text" class="form-control" name="username" />
                     <label>Enter Password :  </label>
                     <input type="password" class="form-control" name="password" />
