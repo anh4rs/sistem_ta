@@ -90,7 +90,7 @@
 			$this->db->from('seminar');
 			$this->db->join('judul', 'judul.id = seminar.judulid');
 			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
-			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
+			$this->db->join('dosen', 'dosen.id = judul.pembimbing', 'left');
 			$this->db->where('seminar.status_pengajuan', 2);
 			$this->db->or_where('seminar.status_pengajuan', 3);
 
@@ -187,7 +187,7 @@
 			$this->db->from('seminar');
 			$this->db->join('judul', 'judul.id = seminar.judulid');
 			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
-			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
+			$this->db->join('dosen', 'dosen.id = judul.pembimbing', 'left');
 			$this->db->where('seminar.id', $this->getID());
 
 			$result = $this->db->get();
