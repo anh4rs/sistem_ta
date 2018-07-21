@@ -60,7 +60,7 @@
 				judul.keterangan
 				');
 			$this->db->from('judul');
-			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
+			$this->db->join('dosen', 'dosen.id = judul.pembimbing', 'left');
 			$this->db->join('judul_detail', 'judul_detail.id_judul = judul.id');
 			$this->db->where('judul.mhsid', $this->getMhsID());
 			$this->db->where('judul.status', 3);
