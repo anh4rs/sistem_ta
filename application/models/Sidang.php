@@ -282,16 +282,16 @@
 			}
 		}
 
-		function cek_hasil_sidang(){
+		function cek_hasil_seminar(){
 			$this->db->select('
-				sidang.id,
-				sidang.judulid,
-				sidang.mhsid,
-				sidang.status_pengajuan,
-				sidang.tanggal,
-				sidang.nilai_pembimbing,
-				sidang.nilai_penguji1,
-				sidang.nilai_penguji2,
+				seminar.id,
+				seminar.judulid,
+				seminar.mhsid,
+				seminar.status_pengajuan,
+				seminar.tanggal,
+				seminar.nilai_pembimbing,
+				seminar.nilai_penguji1,
+				seminar.nilai_penguji2,
 				judul.judul,
 				judul.pembimbing,
 				judul.mhsid,
@@ -302,27 +302,27 @@
 					SELECT
 						dosen.nama_dosen 
 					FROM
-						sidang
-						JOIN judul ON judul.id = sidang.judulid
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
 						JOIN dosen ON dosen.id = judul.penguji1
-					WHERE sidang.status = 1
+					WHERE seminar.status = 1
 				) as penguji1,
 				(
 					SELECT
 						dosen.nama_dosen 
 					FROM
-						sidang
-						JOIN judul ON judul.id = sidang.judulid
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
 						JOIN dosen ON dosen.id = judul.penguji2
-					WHERE sidang.status = 1 
+					WHERE seminar.status = 1 
 				) as penguji2
 				');
-			$this->db->from('sidang');
-			$this->db->join('judul', 'judul.id = sidang.judulid');
+			$this->db->from('seminar');
+			$this->db->join('judul', 'judul.id = seminar.judulid');
 			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
 			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
-			$this->db->where('sidang.mhsid', $this->getMhsID());
-			$this->db->where('sidang.status', 1);
+			$this->db->where('seminar.mhsid', $this->getMhsID());
+			$this->db->where('seminar.status', 1);
 
 			$result = $this->db->get();
 
