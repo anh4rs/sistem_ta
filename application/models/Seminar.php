@@ -103,6 +103,56 @@
 			}
 		}
 
+		function list_finish_seminar_by_akademik(){
+			$this->db->select('
+				seminar.id,
+				seminar.judulid,
+				seminar.mhsid,
+				seminar.nilai_pembimbing,
+				seminar.nilai_penguji1,
+				seminar.nilai_penguji2,
+				seminar.status_pengajuan,
+				judul.judul,
+				judul.pembimbing,
+				judul.mhsid,
+				mahasiswa.nim,
+				mahasiswa.nama_mhs,
+				dosen.nama_dosen,
+				(
+					SELECT
+						dosen.nama_dosen 
+					FROM
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
+						JOIN dosen ON dosen.id = judul.penguji1
+					WHERE seminar.status_pengajuan = 3 
+				) as penguji1,
+				(
+					SELECT
+						dosen.nama_dosen 
+					FROM
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
+						JOIN dosen ON dosen.id = judul.penguji2
+					WHERE seminar.status_pengajuan = 3 
+				) as penguji2,
+				');
+			$this->db->from('seminar');
+			$this->db->join('judul', 'judul.id = seminar.judulid');
+			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
+			$this->db->join('dosen', 'dosen.id = judul.pembimbing', 'left');
+			$this->db->where('seminar.status_pengajuan', 3);
+			$this->db->where('seminar.status', 1);
+
+			$result = $this->db->get();
+
+			if($result->num_rows() > 0){
+				return $result->result_array();
+			}else{
+				return NULL;
+			}
+		}
+
 		function list_ready_seminar_akademik(){
 			$this->db->select('
 				seminar.id,

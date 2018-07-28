@@ -25,6 +25,20 @@ class Penjadwalansidangs extends MY_Controller {
 		$this->load->view('layout/footer');
 	}
 
+	function index_finish(){
+		$id_user = $this->session->userdata('id_user');
+		$jenis_user = $this->session->userdata('jenis_user');
+		$data['id_user'] = $id_user;
+		$data['jenis_user'] = $jenis_user;
+
+		$result = $this->sidang->list_finish_sidang_by_akademik();
+		$data['result'] = $result;
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('list_finish', $data);
+		$this->load->view('layout/footer');	
+	}
+
 	function tentukan_jadwal(){
 		$id_user = $this->session->userdata('id_user');
 		$jenis_user = $this->session->userdata('jenis_user');

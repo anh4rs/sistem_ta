@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="page-head-line">Bimbingan Mahasiswa</h4>
+                <h4 class="page-head-line">Data Mahasiswa yang Telah Sidang</h4>
             </div>
         </div>
         
@@ -23,9 +23,9 @@
                 <?php endif; ?>
                 <!-- End Session Data Pesan Error -->
 
-                <div class="panel panel-default">
+                <div class="panel panel-success">
                     <div class="panel-heading">
-                        Data Mahasiswa yang di Asuh
+                        List Mahasiswa yang Telah Sidang
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -36,11 +36,11 @@
                                         <th>NIM</th>
                                         <th>Mahasiswa</th>
                                         <th>Judul</th>
-                                        <th>Metode</th>
-                                        <th>Ringkasan Masalah</th>
-                                        <th>Deskripsi</th>
-                                        <th>Jadwal Seminar</th>
-                                        <th>Jadwal Sidang</th>
+                                        <th>Pembimbing</th>
+                                        <th>Penguji 1</th>
+                                        <th>Penguji 2</th>
+                                        <th>Nilai</th>
+                                        <th>Grade</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -48,17 +48,30 @@
                                     if($result > 0){
                                         $no=1;
                                         foreach($result as $key => $val) {
+                                            $avg_nilai = (30/100 * $val['nilai_pembimbing']) + ((70/100 * ($val['nilai_penguji1'] + $val['nilai_penguji2']))/2);
+
+                                            if($avg_nilai >= 85 && $avg_nilai <= 100){
+                                                $grade = "A";
+                                            }else if($avg_nilai >= 75 && $avg_nilai < 85){
+                                                $grade = "B";
+                                            }else if($avg_nilai >= 60 && $avg_nilai < 75){
+                                                $grade = "C";
+                                            }else if($avg_nilai >= 40 && $avg_nilai < 60){
+                                                $grade = "D";
+                                            }else if($avg_nilai < 40){
+                                                $grade = "E";
+                                            }
                                         ?>
                                         <tr>
                                             <td><?=$no;?></td>
                                             <td><?=$val['nim'];?></td>
                                             <td><?=$val['nama_mhs'];?></td>
                                             <td><?=$val['judul'];?></td>
-                                            <td><?=$val['metode'];?></td>
-                                            <td><?=$val['ringkas_masalah'];?></td>
-                                            <td><?=$val['deskripsi'];?></td>
-                                            <td><?=$val['pengajuan_seminar'] == 3 ? $val['tanggal_seminar'] : 'Belum ada jadwal';?></td>
-                                            <td><?=$val['pengajuan_sidang'] == 3 ? $val['tanggal_sidang'] : 'Belum ada jadwal';?></td>
+                                            <td><?=$val['nama_dosen'];?></td>
+                                            <td><?=$val['penguji1'];?></td>
+                                            <td><?=$val['penguji2'];?></td>
+                                            <td><?=$avg_nilai;?></td>
+                                            <td><?=$grade;?></td>
                                         </tr>
                                         <?php
                                         $no++;

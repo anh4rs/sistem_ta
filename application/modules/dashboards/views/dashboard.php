@@ -10,14 +10,40 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <div class="alert alert-success">
-                    Login Berhasil <br>
-                    <?=print_r($data_user);?>
-                </div>
-
                 <center>
-                    <h2>Selamat Datang pada Sistem Tugas Akhir Fakultas Ilmu Komputer Universitas Ubudiyah Indonesia</h2>
+                    <h3>Selamat Datang pada Sistem Tugas Akhir Fakultas Ilmu Komputer Universitas Ubudiyah Indonesia</h3>
                 </center>
+
+                <hr>
+
+                <?php
+                foreach ($data_pengaturan as $key => $value) {
+                    if($value['status'] == 0){
+                        $class = "alert alert-danger";
+                        $pesan = "Pengajuan judul belum dibuka oleh Akademik";
+                    }else{
+                        $class = "alert alert-info";
+                        $pesan = "Pengajuan judul telah dibuka oleh Akademik";
+                    }
+                ?>
+                <div class="<?=$class?>">
+                    <strong><?=$value['nama_status']?></strong>
+                    <br>
+                    <?=$pesan;?>
+
+                    <?php
+                    if($jenis_user == "akademik"){
+                    ?>
+                    <div class="pull-right">
+                        <a href="<?=site_url();?>/dashboards/pengaturan" class="btn btn-primary">Setting</a>
+                    </div>
+                    <?php
+                    }
+                    ?>
+                </div>
+                <?php
+                }
+                ?>
             </div>
         </div>
     </div>

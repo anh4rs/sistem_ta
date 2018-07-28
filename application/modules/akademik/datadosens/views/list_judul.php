@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="page-head-line">Bimbingan Mahasiswa</h4>
+                <h4 class="page-head-line">Pengajuan Judul</h4>
             </div>
         </div>
         
@@ -23,9 +23,24 @@
                 <?php endif; ?>
                 <!-- End Session Data Pesan Error -->
 
-                <div class="panel panel-default">
+                <?php
+                if($acc){
+                    ?>
+                    <div class="panel panel-success">
+                    <?php
+                }else{
+                    ?>
+                    <div class="panel panel-default">
+                    <?php
+                }
+                ?>
                     <div class="panel-heading">
-                        Data Mahasiswa yang di Asuh
+                        Pengajuan Judul dari <?=$nim_mhs;?> - <?=$nama_mhs;?>
+                        <?php
+                        if($acc){
+                            echo "<div class='pull-right'><b>Judul Telah di ACC</b></div>";
+                        }
+                        ?>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -33,14 +48,10 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>NIM</th>
                                         <th>Mahasiswa</th>
                                         <th>Judul</th>
                                         <th>Metode</th>
-                                        <th>Ringkasan Masalah</th>
-                                        <th>Deskripsi</th>
-                                        <th>Jadwal Seminar</th>
-                                        <th>Jadwal Sidang</th>
+                                        <th>Respon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,14 +62,33 @@
                                         ?>
                                         <tr>
                                             <td><?=$no;?></td>
-                                            <td><?=$val['nim'];?></td>
-                                            <td><?=$val['nama_mhs'];?></td>
+                                            <td><?=$nama_mhs;?></td>
                                             <td><?=$val['judul'];?></td>
                                             <td><?=$val['metode'];?></td>
-                                            <td><?=$val['ringkas_masalah'];?></td>
-                                            <td><?=$val['deskripsi'];?></td>
-                                            <td><?=$val['pengajuan_seminar'] == 3 ? $val['tanggal_seminar'] : 'Belum ada jadwal';?></td>
-                                            <td><?=$val['pengajuan_sidang'] == 3 ? $val['tanggal_sidang'] : 'Belum ada jadwal';?></td>
+                                            <td>
+                                                <?php
+                                                if($acc){
+                                                    if($val['status'] == 3){
+                                                        echo '<font style="color:green;">ACC</font>';
+                                                        if($val['pembimbing'] == 0){
+                                                            ?>
+                                                            <a href="<?=site_url();?>/judulmahasiswas/form_pembimbing/<?=$val['id']?>" title="Tentukan Pembimbing" class="btn btn-xs btn-success">
+                                                                <i class="fa fa-user"></i>
+                                                            </a>
+                                                        <?php
+                                                        }else{
+                                                            echo ' ('.$val['nama_dosen'].')';
+                                                        }
+                                                    }
+                                                }else{
+                                                    ?>
+                                                    <a href="<?=site_url();?>/judulmahasiswas/detail_data/<?=$val['id']?>" title="Detail" class="btn btn-xs btn-info">
+                                                        <i class="fa fa-info-circle"></i>
+                                                    </a>
+                                                    <?php
+                                                }
+                                                ?>
+                                            </td>
                                         </tr>
                                         <?php
                                         $no++;

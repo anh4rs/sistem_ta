@@ -52,7 +52,7 @@
                                     <?php
                                         if($nilai_seminar > 0){
                                             foreach($nilai_seminar as $key => $val) {
-                                                $avg_nilai = (30/100 * $val['nilai_pembimbing']) + (35/100 * $val['nilai_penguji1']) + (35/100 * $val['nilai_penguji2']);
+                                                $avg_nilai = (30/100 * $val['nilai_pembimbing']) + ((70/100 * ($val['nilai_penguji1'] + $val['nilai_penguji2']))/2);
 
                                                 if($avg_nilai >= 85 && $avg_nilai <= 100){
                                                     $grade = "A";

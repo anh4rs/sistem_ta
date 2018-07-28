@@ -33,13 +33,49 @@ class Dashboards extends MY_Controller {
 		$this->dashboard->setJenisUser($jenis_user);
 
 		$data_user = $this->dashboard->get_user();
+		$data_pengaturan = $this->dashboard->get_pengaturan();
+
 
 		$data['id_user'] = $id_user;
 		$data['jenis_user'] = $jenis_user;
 		$data['data_user'] = $data_user;
+		$data['data_pengaturan'] = $data_pengaturan;
 
 		$this->load->view('layout/header', $data);
 		$this->load->view('dashboard', $data);
 		$this->load->view('layout/footer');
+	}
+
+	function pengaturan(){
+		$id_user = $this->session->userdata('id_user');
+		$jenis_user = $this->session->userdata('jenis_user');
+		$data['id_user'] = $id_user;
+		$data['jenis_user'] = $jenis_user;
+
+		$this->load->view('layout/header', $data);
+		$this->load->view('pengaturan', $data);
+		$this->load->view('layout/footer');
+	}
+
+	function set_pengaturan(){
+		$this->form_validation->set_rules('opt_status', 'Status', 'trim|required', array('required'=>'Status belum dipilih'));
+		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
+
+		if($this->form_validation->run() == FALSE) {
+			$id_user = $this->session->userdata('id_user');
+			$jenis_user = $this->session->userdata('jenis_user');
+			$data['id_user'] = $id_user;
+			$data['jenis_user'] = $jenis_user;
+
+			$this->load->view('layout/header', $data);
+			$this->load->view('pengaturan', $data);
+			$this->load->view('layout/footer');
+		}else{
+
+			$this->dashboard->setStatus($this->input->post('opt_status'));
+			$update = $this->dashboard->edit_pengaturan();
+
+			redirect('dashboards', 'refresh');
+		}
 	}
 }

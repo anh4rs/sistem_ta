@@ -5,6 +5,10 @@
                 <h4 class="page-head-line">Pengajuan Sidang oleh Mahasiswa</h4>
             </div>
         </div>
+
+        <a href="<?=site_url();?>/penjadwalansidangs/index_finish" class="btn btn-success"><i class="fa fa-star"></i> Data Mahasiswa yang telah sidang</a>
+
+        <hr>
         
         <div class="row">
             <div class="col-md-12">
@@ -59,7 +63,7 @@
                                             <td>
                                                 <?php
                                                 if($val['status_pengajuan'] == 3){
-                                                    echo '<font style="color:green;">sidang telah di ACC</font>';
+                                                    echo '<font style="color:green;">Sidang telah di ACC</font>';
                                                 }else{
                                                 ?>
                                                 <a href="<?=site_url();?>/penjadwalansidangs/tentukan_jadwal/<?=$val['id']?>" title="Detail" class="btn btn-xs btn-info">

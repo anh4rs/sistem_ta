@@ -194,7 +194,7 @@ class Penginputannilais extends MY_Controller {
 
 			$this->db->trans_complete();
 
-			redirect('Penginputannilais');
+			redirect('penginputannilais', 'refresh');
 		}
 	}
 
@@ -252,7 +252,7 @@ class Penginputannilais extends MY_Controller {
 
 			$this->db->trans_complete();
 
-			redirect('Penginputannilais');
+			redirect('penginputannilais', 'refresh');
 		}
 	}
 

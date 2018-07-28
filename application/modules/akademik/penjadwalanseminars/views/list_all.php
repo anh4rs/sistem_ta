@@ -5,6 +5,10 @@
                 <h4 class="page-head-line">Pengajuan Seminar oleh Mahasiswa</h4>
             </div>
         </div>
+
+        <a href="<?=site_url();?>/penjadwalanseminars/index_finish" class="btn btn-success"><i class="fa fa-star"></i> Data Mahasiswa yang telah seminar</a>
+
+        <hr>
         
         <div class="row">
             <div class="col-md-12">

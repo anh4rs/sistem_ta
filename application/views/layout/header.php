@@ -66,6 +66,7 @@
                                 if($jenis_user === "akademik"){
                                 ?>
                                     <li><a href="<?=site_url();?>/judulmahasiswas">Judul Mahasiswa</a></li>
+                                    <li><a href="<?=site_url();?>/datadosens">Data Dosen</a></li>
                                     <li><a href="<?=site_url();?>/penjadwalanseminars">Penjadwalan Seminar</a></li>
                                     <li><a href="<?=site_url();?>/penjadwalansidangs">Penjadwalan Sidang</a></li>
                                     <li><a href="<?=site_url();?>/penginputannilais">Penginputan Nilai</a></li>

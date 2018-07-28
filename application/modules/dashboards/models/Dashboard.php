@@ -5,6 +5,10 @@
 	class Dashboard extends CI_Model{
 		private $id_user;
 		private $jenis_user;
+
+		private $id_p;
+		private $nama_status;
+		private $status;
 		
 		function __construct(){
 			parent::__construct();
@@ -16,6 +20,9 @@
 		function getIDUser(){ return $this->id_user; }
 		function setJenisUser($jenis_user){ $this->jenis_user = $jenis_user; }
 		function getJenisUser(){ return $this->jenis_user; }
+
+		function setStatus($status){ $this->status = $status; }
+		function getStatus(){ return $this->status; }
 
 
 		function get_user(){
@@ -43,6 +50,21 @@
 			}else{
 				return NULL;
 			}
+		}
+
+		function get_pengaturan(){
+			$this->db->select('id, nama_status, status');
+			$query = $this->db->get('pengaturan');
+			if($query->num_rows() > 0){
+				return $query->result_array();
+			}else{
+				return NULL;
+			}
+		}
+
+		function edit_pengaturan(){
+			$data = array('status' => $this->getStatus());
+			$this->db->update('pengaturan', $data);
 		}
 	}
 ?>

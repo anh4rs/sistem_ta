@@ -286,11 +286,17 @@
 				judul_detail.id as id_detail,
 				judul_detail.ringkas_masalah,
 				judul_detail.metode,
-				judul_detail.deskripsi
+				judul_detail.deskripsi,
+				seminar.status_pengajuan as pengajuan_seminar,
+				sidang.status_pengajuan as pengajuan_sidang,
+				seminar.tanggal as tanggal_seminar,
+				sidang.tanggal as tanggal_sidang
 			');
 			$this->db->from('judul');
 			$this->db->join('judul_detail', 'judul_detail.id_judul = judul.id');
 			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
+			$this->db->join('seminar', 'seminar.judulid = judul.id');
+			$this->db->join('sidang', 'sidang.judulid = judul.id');
 			$this->db->where('judul.pembimbing', $this->getPembimbing());
 
 			$result = $this->db->get();
@@ -315,12 +321,18 @@
 				judul_detail.id as id_detail,
 				judul_detail.ringkas_masalah,
 				judul_detail.metode,
-				judul_detail.deskripsi
+				judul_detail.deskripsi,
+				seminar.status_pengajuan as pengajuan_seminar,
+				sidang.status_pengajuan as pengajuan_sidang,
+				seminar.tanggal as tanggal_seminar,
+				sidang.tanggal as tanggal_sidang
 			');
 			$this->db->from('judul');
 			$this->db->join('judul_detail', 'judul_detail.id_judul = judul.id');
 			$this->db->join('mahasiswa', 'mahasiswa.id = judul.mhsid');
 			$this->db->join('dosen', 'dosen.id = judul.pembimbing');
+			$this->db->join('seminar', 'seminar.judulid = judul.id');
+			$this->db->join('sidang', 'sidang.judulid = judul.id');
 			$this->db->where('judul.penguji1', $this->getPembimbing());
 			$this->db->or_where('judul.penguji2', $this->getPembimbing());
 

@@ -40,6 +40,8 @@
                                         <th>Ringkasan Masalah</th>
                                         <th>Deskripsi</th>
                                         <th>Pembimbing</th>
+                                        <th>Jadwal Seminar</th>
+                                        <th>Jadwal Sidang</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -57,6 +59,8 @@
                                             <td><?=$val['ringkas_masalah'];?></td>
                                             <td><?=$val['deskripsi'];?></td>
                                             <td><?=$val['nama_dosen'];?></td>
+                                            <td><?=$val['pengajuan_seminar'] == 3 ? $val['tanggal_seminar'] : 'Belum ada jadwal';?></td>
+                                            <td><?=$val['pengajuan_sidang'] == 3 ? $val['tanggal_sidang'] : 'Belum ada jadwal';?></td>
                                         </tr>
                                         <?php
                                         $no++;

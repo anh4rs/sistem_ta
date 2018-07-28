@@ -2,7 +2,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h4 class="page-head-line">Bimbingan Mahasiswa</h4>
+                <h4 class="page-head-line">Data Dosen</h4>
             </div>
         </div>
         
@@ -25,7 +25,10 @@
 
                 <div class="panel panel-default">
                     <div class="panel-heading">
-                        Data Mahasiswa yang di Asuh
+                        List Dosen
+                        <div class="pull-right">
+                            <a href="<?=site_url();?>/datadosens/tambah_data" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah</a>
+                        </div>
                     </div>
                     <div class="panel-body">
                         <div class="table-responsive">
@@ -33,14 +36,11 @@
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>NIM</th>
-                                        <th>Mahasiswa</th>
-                                        <th>Judul</th>
-                                        <th>Metode</th>
-                                        <th>Ringkasan Masalah</th>
-                                        <th>Deskripsi</th>
-                                        <th>Jadwal Seminar</th>
-                                        <th>Jadwal Sidang</th>
+                                        <th>NIP</th>
+                                        <th>Nama Dosen</th>
+                                        <th>Email</th>
+                                        <th>No HP</th>
+                                        <th>Respon</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -51,14 +51,18 @@
                                         ?>
                                         <tr>
                                             <td><?=$no;?></td>
-                                            <td><?=$val['nim'];?></td>
-                                            <td><?=$val['nama_mhs'];?></td>
-                                            <td><?=$val['judul'];?></td>
-                                            <td><?=$val['metode'];?></td>
-                                            <td><?=$val['ringkas_masalah'];?></td>
-                                            <td><?=$val['deskripsi'];?></td>
-                                            <td><?=$val['pengajuan_seminar'] == 3 ? $val['tanggal_seminar'] : 'Belum ada jadwal';?></td>
-                                            <td><?=$val['pengajuan_sidang'] == 3 ? $val['tanggal_sidang'] : 'Belum ada jadwal';?></td>
+                                            <td><?=$val['nip'];?></td>
+                                            <td><?=$val['nama_dosen'];?></td>
+                                            <td><?=$val['email'];?></td>
+                                            <td><?=$val['no_hp'];?></td>
+                                            <td>
+                                                <a href="<?=site_url();?>/datadosens/edit_form/<?=$val['id']?>" title="Edit" class="btn btn-xs btn-warning">
+                                                    <i class="fa fa-pencil-square"></i>
+                                                </a>
+                                                <a href="<?=site_url();?>/datadosens/hapus_data/<?=$val['id']?>" title="Hapus" class="btn btn-xs btn-danger">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                         <?php
                                         $no++;
