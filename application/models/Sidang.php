@@ -54,8 +54,28 @@
 				judul_detail.ringkas_masalah,
 				judul_detail.deskripsi,
 				dosen.nama_dosen,
-				judul.penguji1,
-				judul.penguji2,
+				(
+					SELECT
+						dosen.nama_dosen 
+					FROM
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
+						JOIN dosen ON dosen.id = judul.penguji1
+					WHERE
+						seminar.mhsid = '.$this->getMhsID().' 
+						AND seminar.status_pengajuan = 3 
+				) as penguji1,
+				(
+					SELECT
+						dosen.nama_dosen 
+					FROM
+						seminar
+						JOIN judul ON judul.id = seminar.judulid
+						JOIN dosen ON dosen.id = judul.penguji2
+					WHERE
+						seminar.mhsid = '.$this->getMhsID().' 
+						AND seminar.status_pengajuan = 3 
+				) as penguji2,
 				judul.status,
 				judul.keterangan
 				');
