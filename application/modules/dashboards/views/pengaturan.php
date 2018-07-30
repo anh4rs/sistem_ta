@@ -17,6 +17,7 @@
                                 <div class="form-group">
                                     <label for="exampleInputEmail1">Status Pengajuan Judul </label>
                                     <select name="opt_status" class="form-control">
+                                        <option value="<?=$aktif_pengajuan_judul['status']?>"><?=$aktif_pengajuan_judul['status']==1 ? ' -- Aktif -- ' : ' -- Tidak Aktif -- '; ?></option>
                                         <option value="0">Tidak Aktif</option>
                                         <option value="1">Aktif</option>
                                     </select>

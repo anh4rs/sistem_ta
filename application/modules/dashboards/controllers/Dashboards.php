@@ -52,6 +52,8 @@ class Dashboards extends MY_Controller {
 		$data['id_user'] = $id_user;
 		$data['jenis_user'] = $jenis_user;
 
+		$data['aktif_pengajuan_judul'] = $this->dashboard->status_aktif_pengajuan_judul();
+
 		$this->load->view('layout/header', $data);
 		$this->load->view('pengaturan', $data);
 		$this->load->view('layout/footer');
@@ -66,6 +68,8 @@ class Dashboards extends MY_Controller {
 			$jenis_user = $this->session->userdata('jenis_user');
 			$data['id_user'] = $id_user;
 			$data['jenis_user'] = $jenis_user;
+
+			$data['aktif_pengajuan_judul'] = $this->dashboard->status_aktif_pengajuan_judul();
 
 			$this->load->view('layout/header', $data);
 			$this->load->view('pengaturan', $data);

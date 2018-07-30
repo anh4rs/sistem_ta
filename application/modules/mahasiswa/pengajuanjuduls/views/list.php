@@ -47,9 +47,15 @@
                             <?php
                             if(!$pengajuan_judul && !$acc){
                                 if($ajukan_judul){
-                                ?>
-                                    <a href="<?=site_url();?>/pengajuanjuduls/pengajuan_judul" class="btn btn-success"><i class="fa fa-check-square"></i> Ajukan Judul</a>
-                                <?php
+                                    if($aktif_pengajuan_judul['status'] == 1){
+                                        ?>
+                                        <a href="<?=site_url();?>/pengajuanjuduls/pengajuan_judul" class="btn btn-success"><i class="fa fa-check-square"></i> Ajukan Judul</a>
+                                        <?php
+                                    }else{
+                                        ?>
+                                        Pengajuan judul belum dibuka oleh akademik
+                                        <?php
+                                }
                                 }else{
                                 ?>
                                     <a href="<?=site_url();?>/pengajuanjuduls/tambah_data" class="btn btn-primary"><i class="fa fa-plus-square"></i> Tambah</a>

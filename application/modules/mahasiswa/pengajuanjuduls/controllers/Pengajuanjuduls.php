@@ -32,6 +32,8 @@ class Pengajuanjuduls extends MY_Controller {
 			$data['pengajuan_judul'] = FALSE;
 		}
 
+		$data['aktif_pengajuan_judul'] = $this->judul->status_aktif_pengajuan_judul();
+
 		$data['acc'] = $this->judul->cek_acc_judul();
 
 		$this->load->view('layout/header', $data);

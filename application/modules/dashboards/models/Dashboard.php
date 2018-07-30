@@ -66,5 +66,19 @@
 			$data = array('status' => $this->getStatus());
 			$this->db->update('pengaturan', $data);
 		}
+
+		function status_aktif_pengajuan_judul(){
+			$this->db->select('id, nama_status, status');
+			$this->db->where('id', 1);
+			$this->db->from('pengaturan');
+			$this->db->limit(1);
+
+			$sql = $this->db->get();
+			if($sql->num_rows() > 0){
+				return  $sql->row_array();
+			}else{
+				return NULL;
+			}
+		}
 	}
 ?>
