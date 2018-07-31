@@ -136,7 +136,7 @@ class Penjadwalanseminars extends MY_Controller {
 	function set_jadwal_seminar(){
 		$this->form_validation->set_rules('opt_penguji1', 'Penguji 1', 'trim|required', array('required'=>'Penguji 1 belum dipilih'));
 		$this->form_validation->set_rules('opt_penguji2', 'Penguji 2', 'trim|required', array('required'=>'Penguji 2 belum dipilih'));
-		$this->form_validation->set_rules('txt_tanggal', 'Tanggal', 'trim|required|valid_date', array('required'=>'Tanggal belum diisi atau tidak sesuai format'));
+		$this->form_validation->set_rules('txt_tanggal', 'Tanggal', 'trim|required', array('required'=>'Tanggal belum diisi atau tidak sesuai format'));
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
 
 		if($this->form_validation->run() == FALSE) {

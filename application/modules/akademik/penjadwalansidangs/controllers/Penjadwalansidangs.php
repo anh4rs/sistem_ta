@@ -134,7 +134,7 @@ class Penjadwalansidangs extends MY_Controller {
 	}
 
 	function set_jadwal_sidang(){
-		$this->form_validation->set_rules('txt_tanggal', 'Tanggal', 'trim|required|valid_date', array('required'=>'Tanggal belum diisi atau tidak sesuai format'));
+		$this->form_validation->set_rules('txt_tanggal', 'Tanggal', 'trim|required', array('required'=>'Tanggal belum diisi atau tidak sesuai format'));
 		$this->form_validation->set_error_delimiters('<span class="error">', '</span>');
 
 		if($this->form_validation->run() == FALSE) {

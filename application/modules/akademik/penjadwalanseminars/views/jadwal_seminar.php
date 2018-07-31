@@ -76,8 +76,8 @@
                             </div>
 
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Tanggal</label> <span style="font-style: italic;">Format penginputan tanggal (yyyy-mm-dd) contoh 2018-07-30</span>
-                                <input type="text" name="txt_tanggal" class="form-control" id="exampleInputEmail1" placeholder="Tanggal : Contoh (2018-07-30)" value="<?= set_value('txt_tanggal'); ?>"/>
+                                <label for="exampleInputEmail1">Tanggal dan Jam</label> <span style="font-style: italic;">Format penginputan tanggal dan jam (yyyy-mm-dd HH:mm:ss) contoh 2018-07-30 09:00:00</span>
+                                <input type="text" name="txt_tanggal" class="form-control" id="exampleInputEmail1" placeholder="Tanggal dan Jam : Contoh (2018-07-30 09:00:00)" value="<?= set_value('txt_tanggal'); ?>"/>
                                 <span style="color: red; font-size: 11; font-style: italic;">
                                     <?=form_error('txt_tanggal');?>
                                 </span>
