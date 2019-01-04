@@ -73,6 +73,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $active_group = 'default';
 $query_builder = TRUE;
 
+// tes push dengan Git Kraken
+
 $config = 2;
 
 if($config == 1){
